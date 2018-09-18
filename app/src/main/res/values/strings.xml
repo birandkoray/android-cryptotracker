@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">CryptoTracker</string>
+    <string name="BTC">https://res.cloudinary.com/da7jhtpgh/image/upload/v1508609483/bitcoin_eqld4v.png</string>
+    <string name="ETH">https://res.cloudinary.com/da7jhtpgh/image/upload/v1508609485/ethereum_nw0chu.png</string>
+    <string name="XRP">https://res.cloudinary.com/da7jhtpgh/image/upload/v1508609486/ripple_p0xeut.png</string>
+    <string name="BCH">https://res.cloudinary.com/da7jhtpgh/image/upload/v1516327336/bch_2x_hahroi.png</string>
+    <string name="LTC">https://res.cloudinary.com/da7jhtpgh/image/upload/v1512427497/ltc_fjbqjf.png</string>
+    <string name="DASH">https://res.cloudinary.com/da7jhtpgh/image/upload/v1508609484/dash_oltvqi.png</string>
+    <string name="EOS">https://res.cloudinary.com/da7jhtpgh/image/upload/v1516326878/eos_2x_dvr7p0.png</string>
+    <string name="XEM">https://res.cloudinary.com/da7jhtpgh/image/upload/v1508609486/nem_imprip.png</string>
+    <string name="BCC">https://res.cloudinary.com/da7jhtpgh/image/upload/v1508609486/bitconnect_oj1bo5.png</string>
+    <string name="XMR">https://res.cloudinary.com/da7jhtpgh/image/upload/v1508609486/monero_wzk3ur.png</string>
+    <string name="XLM">https://res.cloudinary.com/da7jhtpgh/image/upload/v1516326886/xlm_2x_jfwlwt.png</string>
+    <string name="ADA">https://res.cloudinary.com/da7jhtpgh/image/upload/v1513434489/cardano_unympj.png</string>
+    <string name="USDT">https://static1.squarespace.com/static/59edfca34c326d599b2fb451/5a023b76652deae895d3d037/5ab277c76d2a73f41eb40e23/1521646196461/TETHER.png?format=1000w</string>
+
 </resources>

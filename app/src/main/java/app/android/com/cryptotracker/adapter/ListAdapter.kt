@@ -12,29 +12,28 @@ import kotlinx.android.synthetic.main.crypto_item.view.*
 
 class ListAdapter(val ctx: Context, private val list: List<Item>) : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
-    val context = ctx
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent?.context)
                 .inflate(R.layout.crypto_item,
                         parent, false)
-        return ViewHolder(view, ctx)
+        return ViewHolder(view)
     }
 
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.bindRepo(list[position])
+        holder?.bindRepo(list[position], ctx)
     }
 
-    class ViewHolder(view: View, ctx: Context) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        val picasso = Picasso.with(ctx)
 
-        fun bindRepo(crypto: Item) {
+        fun bindRepo(crypto: Item, ctx: Context) {
 
+            val picasso = Picasso.with(ctx)
             itemView.textView.text = crypto.name
-            picasso.load("https://res.cloudinary.com/da7jhtpgh/image/upload/v1508609483/bitcoin_eqld4v.png")
+            picasso.load(ctx.resources.getString(ctx.resources.getIdentifier(crypto.symbol,"string" , ctx.packageName)))
                     .into(itemView.imageView)
         }
     }
