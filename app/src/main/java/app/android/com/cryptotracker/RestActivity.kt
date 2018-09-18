@@ -15,8 +15,6 @@ import java.io.IOException
 class RestActivity : AppCompatActivity() {
 
     var itemList: List<Item> = ArrayList<Item>()
-    var adapter : ListAdapter? = null
-
 
     object Constant {
         val apiBaseURL = "https://api.coinmarketcap.com"
@@ -28,8 +26,8 @@ class RestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_rest)
         val recyclerView = findViewById<RecyclerView>(R.id.my_recycler_view)
         run()
-        adapter = ListAdapter(itemList)
-        recyclerView.adapter = adapter
+        Thread.sleep(2000)
+        recyclerView.adapter = ListAdapter(this,itemList)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
     }
@@ -49,10 +47,9 @@ class RestActivity : AppCompatActivity() {
 
                     override fun onResponse(call: Call, response: Response) {
                         Log.d("SALMAN" , "initRecyclerView : init recyclerview.")
-                        val body = response?.body()?.string()
+                        val body = response.body()?.string()
                         val gson = GsonBuilder().create()
                         itemList = gson.fromJson<List<Item>>(body , object : TypeToken<List<Item>>() {}.type)
-                        println(itemList)
                     }
 
                 })
