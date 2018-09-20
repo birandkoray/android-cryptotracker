@@ -1,13 +1,14 @@
 package app.android.com.cryptotracker.adapter
 
 import android.content.Context
+import android.graphics.drawable.Drawable
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import app.android.com.cryptotracker.Item
 import app.android.com.cryptotracker.R
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.crypto_item.view.*
 
 class ListAdapter(val ctx: Context, private val list: List<Item>) : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
@@ -31,10 +32,14 @@ class ListAdapter(val ctx: Context, private val list: List<Item>) : RecyclerView
 
         fun bindRepo(crypto: Item, ctx: Context) {
 
-            val picasso = Picasso.with(ctx)
             itemView.textView.text = crypto.name
-            picasso.load(ctx.resources.getString(ctx.resources.getIdentifier(crypto.symbol,"string" , ctx.packageName)))
-                    .into(itemView.imageView)
+
+            val resId = ctx.resources.getIdentifier(crypto.symbol.toLowerCase() , "drawable" , ctx.packageName)
+
+            val drawable: Drawable? = ResourcesCompat.getDrawable(ctx.resources, resId, null)
+
+            itemView.imageView.setImageDrawable(drawable)
+
         }
     }
 
