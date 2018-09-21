@@ -1,8 +1,11 @@
 package app.android.com.cryptotracker
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -17,13 +20,13 @@ import com.google.gson.reflect.TypeToken
 import okhttp3.*
 import java.io.IOException
 
-class RestActivity : AppCompatActivity() {
+class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
-    var itemList: List<Item> = ArrayList<Item>()
+    private val recyclerView: RecyclerView by lazy { findViewById<RecyclerView>(R.id.my_recycler_view) }
 
-    var recyclerView: RecyclerView? = null
+    private val mSwipeRefreshLayout: SwipeRefreshLayout by lazy { findViewById<SwipeRefreshLayout>(R.id.my_swipe) }
 
-    var progressBar: ProgressBar? = null
+    private val progressBar: ProgressBar by lazy { findViewById<ProgressBar>(R.id.pBar) }
 
     object Constant {
         val apiBaseURL = "https://api.coinmarketcap.com"
@@ -32,14 +35,22 @@ class RestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rest)
-        recyclerView = findViewById(R.id.my_recycler_view)
-        progressBar = findViewById(R.id.pBar)
-        progressBar?.visibility = View.VISIBLE
-        recyclerView?.layoutManager = LinearLayoutManager(this)
+        prepareSwipeLayout()
+        prepareRecyclerView()
+        progressBar.visibility = View.VISIBLE
         if (isNetworkAvailable()) restCall()
         else {
-            progressBar?.visibility = View.GONE; Toast.makeText(this, "NO INTERNET CONNECTION", Toast.LENGTH_LONG).show()
+            progressBar.visibility = View.GONE; Toast.makeText(this, "NO INTERNET CONNECTION", Toast.LENGTH_LONG).show()
         }
+    }
+
+    fun prepareRecyclerView() {
+        recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+    fun prepareSwipeLayout() {
+        mSwipeRefreshLayout.setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW)
+        mSwipeRefreshLayout.setOnRefreshListener(this)
     }
 
     fun restCall() {
@@ -59,10 +70,12 @@ class RestActivity : AppCompatActivity() {
                         Log.d("SALMAN", "initRecyclerView : init recyclerview.")
                         val body = response.body()?.string()
                         val gson = GsonBuilder().create()
-                        itemList = gson.fromJson<List<Item>>(body, object : TypeToken<List<Item>>() {}.type)
+                        val itemList = gson.fromJson<List<Item>>(body, object : TypeToken<List<Item>>() {}.type)
                         runOnUiThread {
-                            recyclerView?.adapter = ListAdapter(this@RestActivity, itemList)
-                            progressBar?.visibility = View.GONE
+                            recyclerView.adapter = ListAdapter(this@RestActivity, itemList)
+                            progressBar.visibility = View.GONE
+                            mSwipeRefreshLayout.isRefreshing = false
+
                         }
                     }
 
@@ -73,5 +86,9 @@ class RestActivity : AppCompatActivity() {
         val connectivityManager: ConnectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetworkInfo = connectivityManager.activeNetworkInfo
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting
+    }
+
+    override fun onRefresh() {
+        restCall()
     }
 }
