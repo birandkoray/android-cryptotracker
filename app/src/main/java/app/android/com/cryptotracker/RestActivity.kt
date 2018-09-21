@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import app.android.com.cryptotracker.adapter.ListAdapter
+import app.android.com.cryptotracker.model.Item
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import okhttp3.*

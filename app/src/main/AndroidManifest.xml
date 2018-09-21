@@ -8,17 +8,18 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/bbad"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/bbad"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RestActivity" android:configChanges="orientation|screenSize">
+        <activity android:name=".SplashScreenActivity" android:theme="@style/SplashScreenTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".RestActivity" android:configChanges="orientation|screenSize"/>
     </application>
 
 </manifest>

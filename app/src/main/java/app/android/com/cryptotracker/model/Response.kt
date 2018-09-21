@@ -1,6 +1,4 @@
-package app.android.com.cryptotracker
-
-data class Result(val items: ArrayList<Item>)
+package app.android.com.cryptotracker.model
 
 data class Item(val id: String,
                 val name: String,
