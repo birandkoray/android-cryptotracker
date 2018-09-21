@@ -44,16 +44,16 @@ class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         }
     }
 
-    fun prepareRecyclerView() {
+    private fun prepareRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(this)
     }
 
-    fun prepareSwipeLayout() {
+    private fun prepareSwipeLayout() {
         mSwipeRefreshLayout.setColorSchemeColors(Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW)
         mSwipeRefreshLayout.setOnRefreshListener(this)
     }
 
-    fun restCall() {
+    private fun restCall() {
         val client = OkHttpClient()
         val request = Request.Builder()
                 .url(Constant.apiBaseURL + "/v1/ticker/?limit=10")
