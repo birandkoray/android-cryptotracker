@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Crypto Tracker</string>
-    <string name="percent_change_24h">Change in 24h</string>
+    <string name="percent_change_24h">24h</string>
+    <string name="percent_change_7d">7d</string>
 </resources>

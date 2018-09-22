@@ -35,13 +35,24 @@ class ListAdapter(val ctx: Context, private val list: List<Item>) : RecyclerView
 
             itemView.textView.text = crypto.name
 
-            var textColor = "#00ff00"
+            var percent24Change = "#006400"
 
-            if (crypto.percent_change_24h.toFloat() < 0) textColor = "#ff0000"
+            var percent7Change = "#006400"
+
+
+
+            if (crypto.percent_change_24h.toFloat() < 0) percent24Change = "#ff0000"
+
 
             //ctx.getString(R.color.colorAccent)
             itemView.percent_24h_val.text = crypto.percent_change_24h + '%'
-            itemView.percent_24h_val.setTextColor(Color.parseColor(textColor));
+            itemView.percent_24h_val.setTextColor(Color.parseColor(percent24Change));
+
+            if(crypto.percent_change_7d.toFloat() < 0) percent7Change = "#ff0000"
+
+            itemView.percent_7d_val.text = crypto.percent_change_7d + '%'
+            itemView.percent_7d_val.setTextColor(Color.parseColor(percent7Change))
+
 
             val resId = ctx.resources.getIdentifier(crypto.symbol.toLowerCase(), "drawable", ctx.packageName)
 
