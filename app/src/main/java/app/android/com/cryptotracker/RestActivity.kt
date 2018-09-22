@@ -1,6 +1,5 @@
 package app.android.com.cryptotracker
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.net.ConnectivityManager
