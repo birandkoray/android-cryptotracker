@@ -33,7 +33,9 @@ class ListAdapter(val ctx: Context, private val list: List<Item>) : RecyclerView
 
         fun bindRepo(crypto: Item, ctx: Context) {
 
-            itemView.textView.text = crypto.name
+            itemView.symbol.text = crypto.symbol
+
+            itemView.name.text = crypto.name
 
             var percent24Change = "#006400"
 
