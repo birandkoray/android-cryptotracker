@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "335450347400",
+    "firebase_url": "https://cryptotracker-android.firebaseio.com",
+    "project_id": "cryptotracker-android",
+    "storage_bucket": "cryptotracker-android.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:335450347400:android:be0f434ce028cedf",
+        "android_client_info": {
+          "package_name": "app.android.com.cryptotracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "335450347400-9qa9m2slj8pe9bmn0jcmog1hach04l45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA20fp7rz7nXlVNfQji9PWyTlcT4b99Se4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

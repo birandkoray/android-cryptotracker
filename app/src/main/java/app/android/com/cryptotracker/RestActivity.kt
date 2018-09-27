@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import app.android.com.cryptotracker.adapter.ListAdapter
+import app.android.com.cryptotracker.constants.Constants
 import app.android.com.cryptotracker.model.Item
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
@@ -27,10 +28,6 @@ class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
     private val progressBar: ProgressBar by lazy { findViewById<ProgressBar>(R.id.pBar) }
 
-    object Constant {
-        val apiBaseURL = "https://api.coinmarketcap.com"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rest)
@@ -39,7 +36,7 @@ class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         progressBar.visibility = View.VISIBLE
         if (isNetworkAvailable()) restCall()
         else {
-            progressBar.visibility = View.GONE; Toast.makeText(this, "NO INTERNET CONNECTION", Toast.LENGTH_LONG).show()
+            progressBar.visibility = View.GONE; Toast.makeText(this, Constants.NETWORK_ERROR_MSG, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -55,7 +52,7 @@ class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     private fun restCall() {
         val client = OkHttpClient()
         val request = Request.Builder()
-                .url(Constant.apiBaseURL + "/v1/ticker/?limit=10")
+                .url(Constants.APIURL)
                 .build()
 
 
@@ -66,7 +63,6 @@ class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                     }
 
                     override fun onResponse(call: Call, response: Response) {
-                        Log.d("SALMAN", "initRecyclerView : init recyclerview.")
                         val body = response.body()?.string()
                         val gson = GsonBuilder().create()
                         val itemList = gson.fromJson<List<Item>>(body, object : TypeToken<List<Item>>() {}.type)
