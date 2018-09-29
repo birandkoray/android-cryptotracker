@@ -2,4 +2,7 @@
     <string name="app_name">Crypto Tracker</string>
     <string name="percent_change_24h">24h</string>
     <string name="percent_change_7d">7d</string>
+    <string name="logoutconfirm">Are you sure?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
 </resources>

@@ -1,6 +1,10 @@
 package app.android.com.cryptotracker
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.app.DialogFragment
 import android.content.Context
+import android.content.DialogInterface
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Bundle
@@ -19,6 +23,7 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import app.android.com.cryptotracker.adapter.ListAdapter
 import app.android.com.cryptotracker.constants.Constants
+import app.android.com.cryptotracker.constants.DialogUtil
 import app.android.com.cryptotracker.model.Item
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.GsonBuilder
@@ -48,7 +53,6 @@ class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
             progressBar.visibility = View.GONE; Toast.makeText(this, Constants.NETWORK_ERROR_MSG, Toast.LENGTH_LONG).show()
         }
 
-
         fbAuth.addAuthStateListener {
             if (fbAuth.currentUser == null) {
                 this.finish()
@@ -59,8 +63,7 @@ class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.logout -> {
-            fbAuth.signOut()
+        R.id.logout2 -> {
             Toast.makeText(this, "LOGGING OUT", Toast.LENGTH_LONG).show()
             true
         }
@@ -74,12 +77,14 @@ class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         val menuItem = menu.findItem(R.id.logout)
         val logoutBtn = menuItem.actionView.findViewById<Button>(R.id.logout_button)
         logoutBtn.setOnClickListener { view ->
-            fbAuth.signOut()
-            Toast.makeText(this, "LOGGED OUT", Toast.LENGTH_SHORT).show();
+            DialogUtil.logoutConfirmDialog(this, R.string.yes, DialogInterface.OnClickListener { dialogInterface, i ->
+                fbAuth.signOut()
+                Toast.makeText(this, "LOGGED OUT", Toast.LENGTH_SHORT).show()
+            }, R.string.no, null).show()
         }
-
         return true
     }
+
 
     private fun prepareRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -123,6 +128,7 @@ class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         val activeNetworkInfo = connectivityManager.activeNetworkInfo
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting
     }
+
 
     override fun onRefresh() {
         restCall()

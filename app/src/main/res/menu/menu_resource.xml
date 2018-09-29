@@ -7,4 +7,11 @@
         app:actionLayout="@layout/button_layout"
         android:title="LOGOUT"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/logout2"
+        app:actionLayout="@layout/button_layout"
+        android:title="ROK"
+        app:showAsAction="never" />
+
+
 </menu>
