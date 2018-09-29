@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showMessage(view: View, message: String) {
-        Snackbar.make(view, message, Snackbar.LENGTH_INDEFINITE)
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
                 .setAction("Action", null)
                 .show()
     }

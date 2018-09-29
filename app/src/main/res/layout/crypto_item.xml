@@ -104,7 +104,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
-        android:textColor="@android:color/holo_red_dark"
+        android:textColor="@android:color/holo_blue_light"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/symbol"

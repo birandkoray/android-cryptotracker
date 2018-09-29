@@ -4,23 +4,31 @@ import android.content.Context
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.Toast
 import app.android.com.cryptotracker.adapter.ListAdapter
 import app.android.com.cryptotracker.constants.Constants
 import app.android.com.cryptotracker.model.Item
+import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import okhttp3.*
 import java.io.IOException
 
 class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
+
+    var fbAuth = FirebaseAuth.getInstance()
 
     private val recyclerView: RecyclerView by lazy { findViewById<RecyclerView>(R.id.my_recycler_view) }
 
@@ -31,6 +39,7 @@ class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rest)
+        setSupportActionBar(findViewById(R.id.my_toolbar))
         prepareSwipeLayout()
         prepareRecyclerView()
         progressBar.visibility = View.VISIBLE
@@ -38,6 +47,38 @@ class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         else {
             progressBar.visibility = View.GONE; Toast.makeText(this, Constants.NETWORK_ERROR_MSG, Toast.LENGTH_LONG).show()
         }
+
+
+        fbAuth.addAuthStateListener {
+            if (fbAuth.currentUser == null) {
+                this.finish()
+            }
+        }
+
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.logout -> {
+            fbAuth.signOut()
+            Toast.makeText(this, "LOGGING OUT", Toast.LENGTH_LONG).show()
+            true
+        }
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_resource, menu)
+        val menuItem = menu.findItem(R.id.logout)
+        val logoutBtn = menuItem.actionView.findViewById<Button>(R.id.logout_button)
+        logoutBtn.setOnClickListener { view ->
+            fbAuth.signOut()
+            Toast.makeText(this, "LOGGED OUT", Toast.LENGTH_SHORT).show();
+        }
+
+        return true
     }
 
     private fun prepareRecyclerView() {
