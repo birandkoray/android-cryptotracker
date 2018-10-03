@@ -5,4 +5,5 @@ object Constants {
     val EMAIL = "XXXXXX"
     val PASSWORD = "YYYYY"
     val NETWORK_ERROR_MSG = "NO INTERNET CONNECTION"
+    val ITEM = "ITEM"
 }

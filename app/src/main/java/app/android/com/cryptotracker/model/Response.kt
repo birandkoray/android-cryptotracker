@@ -1,5 +1,7 @@
 package app.android.com.cryptotracker.model
 
+import java.io.Serializable
+
 data class Item(val id: String,
                 val name: String,
                 val symbol: String,
@@ -13,4 +15,4 @@ data class Item(val id: String,
                 val percent_change_1h: String,
                 val percent_change_24h: String,
                 val percent_change_7d: String,
-                val last_updated: String)
+                val last_updated: String):Serializable
