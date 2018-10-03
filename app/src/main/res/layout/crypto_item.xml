@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/crypto_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -21,17 +22,16 @@
         app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
-        android:id="@+id/symbol"
-        android:layout_width="0dp"
-        android:layout_height="24dp"
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:text="@string/app_name"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/holo_green_light"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,8 +45,11 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/symbol"
-        app:layout_constraintTop_toBottomOf="@+id/symbol"
+        app:layout_constraintEnd_toStartOf="@+id/percent_24h_val"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/name"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -61,6 +64,8 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/label7d"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/percent_change_24h"
         app:layout_constraintTop_toBottomOf="@+id/symbol" />
 
@@ -77,7 +82,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/label7d"
         app:layout_constraintTop_toBottomOf="@id/symbol" />
 
@@ -93,20 +98,9 @@
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/percent_7d_val"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/percent_24h_val"
         app:layout_constraintTop_toBottomOf="@+id/symbol" />
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="23dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        android:textColor="@android:color/holo_blue_light"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/symbol"
-        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

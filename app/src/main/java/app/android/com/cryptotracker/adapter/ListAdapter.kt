@@ -47,7 +47,6 @@ class ListAdapter(val ctx: Context, private val list: List<Item>) : RecyclerView
 
         fun bindRepo(crypto: Item, ctx: Context) {
 
-            itemView.symbol.text = crypto.symbol
 
             itemView.name.text = crypto.name
 
