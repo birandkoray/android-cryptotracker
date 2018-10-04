@@ -50,9 +50,9 @@ class ListAdapter(val ctx: Context, private val list: List<Item>) : RecyclerView
 
             itemView.name.text = crypto.name
 
-            var percent24Change = "#006400"
+            var percent24Change = "#00ff00"
 
-            var percent7Change = "#006400"
+            var percent7Change = "#00ff00"
 
             if (crypto.percent_change_24h.toFloat() < 0) percent24Change = "#ff0000"
 
