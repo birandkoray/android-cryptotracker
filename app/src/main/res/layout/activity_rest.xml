@@ -8,13 +8,10 @@
     android:orientation="vertical"
     tools:context=".RestActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
+
+    <fragment
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_red_light"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        android:layout_height="wrap_content" class="app.android.com.cryptotracker.fragment.ToolbarFragment"/>
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/my_swipe"

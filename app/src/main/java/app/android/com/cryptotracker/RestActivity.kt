@@ -1,5 +1,6 @@
 package app.android.com.cryptotracker
 
+import android.app.Fragment
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
@@ -18,6 +19,7 @@ import android.widget.Toast
 import app.android.com.cryptotracker.adapter.ListAdapter
 import app.android.com.cryptotracker.constants.Constants
 import app.android.com.cryptotracker.constants.DialogUtil
+import app.android.com.cryptotracker.fragment.ToolbarFragment
 import app.android.com.cryptotracker.model.Item
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.GsonBuilder
@@ -27,32 +29,32 @@ import java.io.IOException
 
 class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
-    var fbAuth = FirebaseAuth.getInstance()
-
     private val recyclerView: RecyclerView by lazy { findViewById<RecyclerView>(R.id.my_recycler_view) }
 
     private val mSwipeRefreshLayout: SwipeRefreshLayout by lazy { findViewById<SwipeRefreshLayout>(R.id.my_swipe) }
 
-    private val progressBar: ProgressBar by lazy { findViewById<ProgressBar>(R.id.pBar) }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rest)
-        setSupportActionBar(findViewById(R.id.my_toolbar))
+        //setSupportActionBar(findViewById(R.id.my_toolbar))
         prepareSwipeLayout()
         prepareRecyclerView()
-        progressBar.visibility = View.VISIBLE
+
+        /*val toolbarFragment = ToolbarFragment() as android.support.v4.app.Fragment
+
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container_x ,
+                        toolbarFragment
+                        )
+                .addToBackStack(null)
+                .commit()*/
+
+
         if (isNetworkAvailable()) restCall()
         else {
-            progressBar.visibility = View.GONE; Toast.makeText(this, Constants.NETWORK_ERROR_MSG, Toast.LENGTH_LONG).show()
+            Toast.makeText(this, Constants.NETWORK_ERROR_MSG, Toast.LENGTH_LONG).show()
         }
-
-        fbAuth.addAuthStateListener {
-            if (fbAuth.currentUser == null) {
-                this.finish()
-            }
-        }
-
 
     }
 
@@ -65,20 +67,6 @@ class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
             super.onOptionsItemSelected(item)
         }
     }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_resource, menu)
-        val menuItem = menu.findItem(R.id.logout)
-        val logoutBtn = menuItem.actionView.findViewById<Button>(R.id.logout_button)
-        logoutBtn.setOnClickListener { view ->
-            DialogUtil.logoutConfirmDialog(this, R.string.yes, DialogInterface.OnClickListener { dialogInterface, i ->
-                fbAuth.signOut()
-                Toast.makeText(this, "LOGGED OUT", Toast.LENGTH_SHORT).show()
-            }, R.string.no, null).show()
-        }
-        return true
-    }
-
 
     private fun prepareRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -108,7 +96,6 @@ class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                         val itemList = gson.fromJson<List<Item>>(body, object : TypeToken<List<Item>>() {}.type)
                         runOnUiThread {
                             recyclerView.adapter = ListAdapter(this@RestActivity, itemList)
-                            progressBar.visibility = View.GONE
                             mSwipeRefreshLayout.isRefreshing = false
 
                         }

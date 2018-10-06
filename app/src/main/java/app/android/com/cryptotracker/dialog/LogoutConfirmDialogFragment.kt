@@ -23,7 +23,9 @@ class LogoutConfirmDialogFragment : DialogFragment() {
                                 // User cancelled the dialog
                             })
             // Create the AlertDialog object and return it
-            builder.create()
+            val dialog  : AlertDialog = builder.create()
+
+            return dialog
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
