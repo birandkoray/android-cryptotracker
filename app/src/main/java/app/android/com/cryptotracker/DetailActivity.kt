@@ -17,11 +17,14 @@ class DetailActivity : AppCompatActivity() {
 
     val name: TextView by lazy { findViewById<TextView>(R.id.crypto_name) }
 
+    val price: TextView by lazy { findViewById<TextView>(R.id.crypto_price)}
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         drawLogo()
         name.setText(item.name)
+        price.setText(item.price_usd.substring(0 , item.price_usd.indexOf('.') + 3) + '$')
 
     }
 
