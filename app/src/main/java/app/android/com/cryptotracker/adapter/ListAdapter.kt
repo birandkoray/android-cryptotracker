@@ -10,15 +10,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import app.android.com.cryptotracker.DetailActivity
-import app.android.com.cryptotracker.MainActivity
 import app.android.com.cryptotracker.model.Item
 import app.android.com.cryptotracker.R
-import app.android.com.cryptotracker.RestActivity
 import app.android.com.cryptotracker.constants.Constants
 import kotlinx.android.synthetic.main.crypto_item.view.*
 
-class ListAdapter(val ctx: Context, private val list: List<Item>) : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
+class ListAdapter(val ctx: Context, private val list: List<Item> ) : RecyclerView.Adapter<ListAdapter.ViewHolder>() {
 
+
+    var selectedRowIndex : Int = -1
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent?.context)
@@ -31,19 +31,26 @@ class ListAdapter(val ctx: Context, private val list: List<Item>) : RecyclerView
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.bindRepo(list[position], ctx)
+        if(selectedRowIndex == position)
+            holder?.itemView!!.setBackgroundColor(Color.YELLOW)
+        else
+            holder?.itemView!!.setBackgroundColor(Color.DKGRAY)
         holder?.item = list[position]
+        holder?.itemView!!.setOnClickListener {
+            selectedRowIndex = position
+            notifyDataSetChanged()
+            val intent = Intent(it.context , DetailActivity::class.java)
+            intent.putExtra(Constants.ITEM , holder?.item)
+            it.context.startActivity(intent)
+
+        }
+
+
+
     }
 
 
     class ViewHolder(view: View , var item : Item? = null) : RecyclerView.ViewHolder(view) {
-        init {
-            view.setOnClickListener {
-                val intent = Intent(view.context , DetailActivity::class.java)
-                intent.putExtra(Constants.ITEM , item)
-                view.context.startActivity(intent)
-            }
-        }
-
 
         fun bindRepo(crypto: Item, ctx: Context) {
 
