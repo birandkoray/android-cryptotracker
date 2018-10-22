@@ -31,14 +31,14 @@ class ListAdapter(val ctx: Context, private val list: List<Item> ) : RecyclerVie
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         holder?.bindRepo(list[position], ctx)
-        if(selectedRowIndex == position)
-            holder?.itemView!!.setBackgroundColor(Color.YELLOW)
-        else
-            holder?.itemView!!.setBackgroundColor(Color.DKGRAY)
+//        if(selectedRowIndex == position)
+//            holder?.itemView!!.setBackgroundColor(Color.YELLOW)
+//        else
+//            holder?.itemView!!.setBackgroundColor(Color.DKGRAY)
         holder?.item = list[position]
         holder?.itemView!!.setOnClickListener {
-            selectedRowIndex = position
-            notifyDataSetChanged()
+            //selectedRowIndex = position
+            //notifyDataSetChanged()
             val intent = Intent(it.context , DetailActivity::class.java)
             intent.putExtra(Constants.ITEM , holder?.item)
             it.context.startActivity(intent)
