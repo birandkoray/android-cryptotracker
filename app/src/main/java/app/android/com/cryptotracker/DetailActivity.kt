@@ -22,15 +22,26 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+        setSupportActionBar(findViewById(R.id.my_toolbar))
+        customizeSupportActionBar()
         drawLogo()
-        name.setText(item.name)
-        price.setText(item.price_usd.substring(0 , item.price_usd.indexOf('.') + 3) + '$')
+        customizeDetail()
+    }
 
+    private fun customizeSupportActionBar() {
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
+        supportActionBar!!.setTitle(item.name + " Detail")
     }
 
     private fun drawLogo() {
         val resId = this.resources.getIdentifier(item.symbol.toLowerCase(), "drawable", this.packageName)
         val drawable: Drawable? = ResourcesCompat.getDrawable(this.resources, resId, null)
         logo.setImageDrawable(drawable)
+    }
+
+    private fun customizeDetail() {
+        name.setText(item.name)
+        price.setText(item.price_usd.substring(0 , item.price_usd.indexOf('.') + 3) + '$')
     }
 }
