@@ -6,4 +6,5 @@ object Constants {
     val PASSWORD = "YYYYY"
     val NETWORK_ERROR_MSG = "NO INTERNET CONNECTION"
     val ITEM = "ITEM"
+    val APIKEY = "uuuuuuu"
 }
