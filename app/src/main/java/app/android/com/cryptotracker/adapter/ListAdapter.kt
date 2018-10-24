@@ -61,15 +61,19 @@ class ListAdapter(val ctx: Context, private val list: List<Item> ) : RecyclerVie
 
             var percent7Change = "#00ff00"
 
-            if (crypto.percent_change_24h.toFloat() < 0) percent24Change = "#ff0000"
+            val percent_change_24h = crypto.quote.USD.percent_change_24h
 
-            itemView.percent_24h_val.text = crypto.percent_change_24h + '%'
+            val percent_change_7d = crypto.quote.USD.percent_change_7d
+
+            if (percent_change_24h < 0) percent24Change = "#ff0000"
+
+            itemView.percent_24h_val.text = "%.2f".format(percent_change_24h)
 
             itemView.percent_24h_val.setTextColor(Color.parseColor(percent24Change));
 
-            if(crypto.percent_change_7d.toFloat() < 0) percent7Change = "#ff0000"
+            if(percent_change_7d < 0) percent7Change = "#ff0000"
 
-            itemView.percent_7d_val.text = crypto.percent_change_7d + '%'
+            itemView.percent_7d_val.text = "%.2f".format(percent_change_7d)
 
             itemView.percent_7d_val.setTextColor(Color.parseColor(percent7Change))
 

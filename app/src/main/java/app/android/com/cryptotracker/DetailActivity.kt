@@ -31,7 +31,7 @@ class DetailActivity : AppCompatActivity() {
     private fun customizeSupportActionBar() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
-        supportActionBar!!.setTitle(item.name + " Detail")
+        supportActionBar!!.title = item.name + " Detail"
     }
 
     private fun drawLogo() {
@@ -41,7 +41,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun customizeDetail() {
-        name.setText(item.name)
-        price.setText(item.price_usd.substring(0 , item.price_usd.indexOf('.') + 3) + '$')
+        name.text = item.name
+        price.text = "%.2f".format(item.quote.USD.price) + "$"
     }
 }
