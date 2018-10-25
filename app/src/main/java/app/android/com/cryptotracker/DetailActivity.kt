@@ -1,9 +1,10 @@
 package app.android.com.cryptotracker
 
 import android.graphics.drawable.Drawable
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.res.ResourcesCompat
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
 import android.widget.ImageView
 import android.widget.TextView
 import app.android.com.cryptotracker.constants.Constants
@@ -17,12 +18,14 @@ class DetailActivity : AppCompatActivity() {
 
     val name: TextView by lazy { findViewById<TextView>(R.id.crypto_name) }
 
-    val price: TextView by lazy { findViewById<TextView>(R.id.crypto_price)}
+    val price: TextView by lazy { findViewById<TextView>(R.id.crypto_price) }
+
+    val toolbar: Toolbar by lazy { findViewById<Toolbar>(R.id.my_toolbar) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-        setSupportActionBar(findViewById(R.id.my_toolbar))
+        setSupportActionBar(toolbar)
         customizeSupportActionBar()
         drawLogo()
         customizeDetail()
@@ -43,5 +46,10 @@ class DetailActivity : AppCompatActivity() {
     private fun customizeDetail() {
         name.text = item.name
         price.text = "%.2f".format(item.quote.USD.price) + "$"
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed();
+        return true
     }
 }
