@@ -1,13 +1,12 @@
 package app.android.com.cryptotracker
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.widget.ImageView
 import android.widget.TextView
 import app.android.com.cryptotracker.constants.Constants
+import app.android.com.cryptotracker.constants.Util
 import app.android.com.cryptotracker.model.Item
 
 class DetailActivity : AppCompatActivity() {
@@ -38,14 +37,12 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun drawLogo() {
-        val resId = this.resources.getIdentifier(item.symbol.toLowerCase(), "drawable", this.packageName)
-        val drawable: Drawable? = ResourcesCompat.getDrawable(this.resources, resId, null)
-        logo.setImageDrawable(drawable)
+        logo.setImageDrawable(Util.getLogo(this.resources, item.symbol.toLowerCase(), this.packageName, R.drawable.unknown))
     }
 
     private fun customizeDetail() {
         name.text = item.name
-        price.text = "%.2f".format(item.quote.USD.price) + "$"
+        price.text = Util.formatWithSymbol(item.quote.USD.price, "$")
     }
 
     override fun onSupportNavigateUp(): Boolean {

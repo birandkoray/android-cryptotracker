@@ -3,8 +3,6 @@ package app.android.com.cryptotracker.adapter
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +10,7 @@ import android.view.ViewGroup
 import app.android.com.cryptotracker.DetailActivity
 import app.android.com.cryptotracker.R
 import app.android.com.cryptotracker.constants.Constants
+import app.android.com.cryptotracker.constants.Util
 import app.android.com.cryptotracker.model.Item
 import kotlinx.android.synthetic.main.crypto_item.view.*
 
@@ -51,22 +50,16 @@ class ListAdapter(val ctx: Context, private val list: List<Item>) : RecyclerView
 
     class ViewHolder(view: View, var item: Item? = null) : RecyclerView.ViewHolder(view) {
 
-        var percent24Change = "#00ff00"
-        var percent7Change = "#00ff00"
 
         fun bindRepo(crypto: Item, ctx: Context) {
             itemView.name.text = crypto.name
             val percent_change_24h = crypto.quote.USD.percent_change_24h
             val percent_change_7d = crypto.quote.USD.percent_change_7d
-            if (percent_change_24h < 0) percent24Change = "#ff0000"
-            itemView.percent_24h_val.text = "%.2f".format(percent_change_24h) + '%'
-            itemView.percent_24h_val.setTextColor(Color.parseColor(percent24Change));
-            if (percent_change_7d < 0) percent7Change = "#ff0000"
-            itemView.percent_7d_val.text = "%.2f".format(percent_change_7d) + '%'
-            itemView.percent_7d_val.setTextColor(Color.parseColor(percent7Change))
-            val resId = ctx.resources.getIdentifier(crypto.symbol.toLowerCase(), "drawable", ctx.packageName)
-            val drawable: Drawable? = ResourcesCompat.getDrawable(ctx.resources, resId, null)
-            itemView.imageView.setImageDrawable(drawable)
+            itemView.percent_24h_val.text = Util.formatWithSymbol(percent_change_24h)
+            itemView.percent_24h_val.setTextColor(Color.parseColor(Util.decideColor(percent_change_24h)));
+            itemView.percent_7d_val.text = Util.formatWithSymbol(percent_change_7d)
+            itemView.percent_7d_val.setTextColor(Color.parseColor(Util.decideColor(percent_change_7d)))
+            itemView.imageView.setImageDrawable(Util.getLogo(ctx.resources, crypto.symbol.toLowerCase(), ctx.packageName, R.drawable.unknown))
         }
     }
 }

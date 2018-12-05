@@ -27,21 +27,8 @@ class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rest)
-        //setSupportActionBar(findViewById(R.id.my_toolbar))
         prepareSwipeLayout()
         prepareRecyclerView()
-
-        /*val toolbarFragment = ToolbarFragment() as android.support.v4.app.Fragment
-
-        supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container_x ,
-                        toolbarFragment
-                        )
-                .addToBackStack(null)
-                .commit()*/
-
-
         if (isNetworkAvailable()) restCall()
         else {
             Toast.makeText(this, Constants.NETWORK_ERROR_MSG, Toast.LENGTH_LONG).show()
