@@ -12,7 +12,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import app.android.com.cryptotracker.adapter.ListAdapter
 import app.android.com.cryptotracker.constants.Constants
-import app.android.com.cryptotracker.model.Item
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import okhttp3.*

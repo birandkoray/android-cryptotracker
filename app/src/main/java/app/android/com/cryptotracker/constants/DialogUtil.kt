@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
+import android.graphics.Color
 import android.support.v4.content.ContextCompat
 import app.android.com.cryptotracker.R
 
@@ -24,8 +25,9 @@ object DialogUtil {
 
         alertDialog.setOnShowListener {
             val dialog = it as AlertDialog
-            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
-            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(context, R.color.green));
+            dialog.window.decorView.setBackgroundColor(Color.YELLOW)
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#4fb81c"))
+            dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.RED);
 
         }
 
