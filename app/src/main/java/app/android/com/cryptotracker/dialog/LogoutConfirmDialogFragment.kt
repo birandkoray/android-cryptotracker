@@ -15,11 +15,11 @@ class LogoutConfirmDialogFragment : DialogFragment() {
             val builder = AlertDialog.Builder(it)
             builder.setMessage(R.string.logoutconfirm)
                     .setPositiveButton(R.string.yes,
-                            DialogInterface.OnClickListener { dialog, id ->
+                            DialogInterface.OnClickListener { _, _ ->
                                 // FIRE ZE MISSILES!
                             })
                     .setNegativeButton(R.string.no,
-                            DialogInterface.OnClickListener { dialog, id ->
+                            DialogInterface.OnClickListener { _, _ ->
                                 // User cancelled the dialog
                             })
             // Create the AlertDialog object and return it

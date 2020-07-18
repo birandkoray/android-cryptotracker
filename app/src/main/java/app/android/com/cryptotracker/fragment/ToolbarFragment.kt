@@ -40,10 +40,10 @@ class ToolbarFragment : Fragment() {
         }
 
         val logoutBtn = view.findViewById<Button>(R.id.logout_button)
-        logoutBtn.setOnClickListener { view ->
-            DialogUtil.logoutConfirmDialog(view.context, R.string.yes, DialogInterface.OnClickListener { dialogInterface, i ->
+        logoutBtn.setOnClickListener { _view ->
+            DialogUtil.logoutConfirmDialog(_view.context, R.string.yes, DialogInterface.OnClickListener { _, _ ->
                 fbAuth.signOut()
-                val toast = Toast.makeText(view.context, "LOGGED OUT", Toast.LENGTH_SHORT)
+                val toast = Toast.makeText(_view.context, "LOGGED OUT", Toast.LENGTH_SHORT)
                 toast.view.setBackgroundColor(Color.RED)
                 toast.show()
             }, R.string.no, null).show()

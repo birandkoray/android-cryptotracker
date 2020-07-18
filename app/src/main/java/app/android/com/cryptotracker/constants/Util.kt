@@ -15,7 +15,7 @@ object Util {
     fun getLogo(resource: Resources , name : String , packageName : String ,
                 unknownLogo : Int) : Drawable {
         var resId = resource.getIdentifier(name , "drawable" , packageName )
-        if (resId === NOT_FOUND) resId = unknownLogo
+        if (resId == NOT_FOUND) resId = unknownLogo
         return ResourcesCompat.getDrawable(resource , resId , null)!!
     }
 

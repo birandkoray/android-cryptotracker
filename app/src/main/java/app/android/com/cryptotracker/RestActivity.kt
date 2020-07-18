@@ -71,9 +71,9 @@ class RestActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                     override fun onResponse(call: Call, response: Response) {
                         val body = response.body()?.string()
                         val gson = GsonBuilder().create()
-                        val response = gson.fromJson<app.android.com.cryptotracker.model.Response>(body, object : TypeToken<app.android.com.cryptotracker.model.Response>() {}.type)
+                        val mappedResponse = gson.fromJson<app.android.com.cryptotracker.model.Response>(body, object : TypeToken<app.android.com.cryptotracker.model.Response>() {}.type)
                         runOnUiThread {
-                            recyclerView.adapter = ListAdapter(this@RestActivity, response.data)
+                            recyclerView.adapter = ListAdapter(this@RestActivity, mappedResponse.data)
                             mSwipeRefreshLayout.isRefreshing = false
 
                         }
